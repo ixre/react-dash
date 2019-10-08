@@ -1,8 +1,5 @@
 import { LOGING } from "./Action";
-const initialState = {
-    user: { }
-};
-export default function user (state = initialState, action) {
+export default function user (state = {}, action) {
     switch (action.type) {
         case LOGING: {
             break;

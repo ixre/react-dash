@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 import user from './user/Reducer';
+import data from './data/Reducer';
 
 export const makeRootReducer = (asyncReducers) => {
   return combineReducers({
     user,
+    data,
     ...asyncReducers
   })
 }

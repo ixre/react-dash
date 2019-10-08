@@ -8,12 +8,16 @@ import EchartsViews from './EchartsViews';
 import EchartsProjects from './EchartsProjects';
 import b1 from '../../style/imgs/b1.jpg';
 import { connect } from 'react-redux';
+import { getHome } from "../../redux/data/Action";
 
 @connect((state, props) =>{
     console.log(state,props, 6666)
 })
 
 class Dashboard extends React.Component {
+    componentDidMount() {
+        this.props.dispatch(getHome())
+    }
     render() {
         return (
             <div className="gutter-example button-demo">

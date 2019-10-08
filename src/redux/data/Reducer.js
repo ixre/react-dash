@@ -1,10 +1,8 @@
 import { GET_HOME_DATA } from "./Action";
-const initialState = {
-    data: { }
-};
-export default function user (state = initialState, action) {
+export default function user (state = { }, action) {
     switch (action.type) {
         case GET_HOME_DATA: {
+            console.log('reducer')
             break;
 
         }
