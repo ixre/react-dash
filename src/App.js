@@ -9,16 +9,16 @@ import { connectAlita } from 'redux-alita';
 
 const { Content, Footer } = Layout;
 
-class App extends Component {
+export default class App extends Component {
     state = {
         collapsed: false,
         title: '',
     };
     componentWillMount() {
-        const { setAlitaState } = this.props;
-        const user = JSON.parse(localStorage.getItem('user'));
-        // user && receiveData(user, 'auth');
-        user && setAlitaState({ stateName: 'auth', data: user });
+        // const { setAlitaState } = this.props;
+        // const user = JSON.parse(localStorage.getItem('user'));
+        // // user && receiveData(user, 'auth');
+        // user && setAlitaState({ stateName: 'auth', data: user });
         // receiveData({a: 213}, 'auth');
         // fetchData({funcName: 'admin', stateName: 'auth'});
         this.getClientWidth();
@@ -65,10 +65,10 @@ class App extends Component {
     }
     getClientWidth = () => {
         // 获取当前浏览器宽度并设置responsive管理响应式
-        const { setAlitaState } = this.props;
-        const clientWidth = window.innerWidth;
-        console.log(clientWidth);
-        setAlitaState({ stateName: 'responsive', data: { isMobile: clientWidth <= 992 } });
+        // const { setAlitaState } = this.props;
+        // const clientWidth = window.innerWidth;
+        // console.log(clientWidth);
+        // setAlitaState({ stateName: 'responsive', data: { isMobile: clientWidth <= 992 } });
         // receiveData({isMobile: clientWidth <= 992}, 'responsive');
     };
     toggle = () => {
@@ -103,5 +103,3 @@ class App extends Component {
         );
     }
 }
-
-export default connectAlita(['auth', 'responsive'])(App);

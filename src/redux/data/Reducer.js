@@ -1,10 +1,10 @@
-import { LOGING } from "./Action";
+import { GET_HOME_DATA } from "./Action";
 const initialState = {
-    user: { }
+    data: { }
 };
 export default function user (state = initialState, action) {
     switch (action.type) {
-        case LOGING: {
+        case GET_HOME_DATA: {
             break;
 
         }

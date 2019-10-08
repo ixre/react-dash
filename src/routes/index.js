@@ -10,6 +10,7 @@ import queryString from 'query-string';
 
 export default class CRouter extends Component {
     requireAuth = (permission, component) => {
+        console.log('登录登录')
         const { auth } = this.props;
         const { permissions } = auth.data;
         // const { auth } = store.getState().httpData;
@@ -26,6 +27,7 @@ export default class CRouter extends Component {
         return permission ? this.requireAuth(permission, component) : component;
     };
     render() {
+        console.log(2222222)
         return (
             <Switch>
                 {Object.keys(routesConfig).map(key =>

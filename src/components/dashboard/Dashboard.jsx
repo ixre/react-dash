@@ -7,7 +7,11 @@ import BreadcrumbCustom from '../BreadcrumbCustom';
 import EchartsViews from './EchartsViews';
 import EchartsProjects from './EchartsProjects';
 import b1 from '../../style/imgs/b1.jpg';
+import { connect } from 'react-redux';
 
+@connect((state, props) =>{
+    console.log(state,props, 6666)
+})
 
 class Dashboard extends React.Component {
     render() {
