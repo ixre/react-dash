@@ -4,13 +4,14 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { PwaInstaller } from '../widget';
-
+import { connect } from 'react-redux';
+import { loginIn } from "../../redux/user/Action";
 const FormItem = Form.Item;
 
-export default class Login extends React.Component {
-    componentDidMount() {
-
-    }
+@connect((state, props) =>{
+    return {}
+})
+class Login extends React.Component {
     componentDidUpdate(prevProps) { // React 16.3+弃用componentWillReceiveProps
         const { auth: nextAuth = {}, history } = this.props;
         // const { history } = this.props;
@@ -19,9 +20,9 @@ export default class Login extends React.Component {
             history.push('/');
         }
     }
-    handleSubmit = (e) => {
-
-    };
+    handleSubmit=()=>{
+        this.props.dispatch(loginIn());
+    }
     render() {
 
         return (
@@ -55,3 +56,4 @@ export default class Login extends React.Component {
         );
     }
 }
+export default Login;
