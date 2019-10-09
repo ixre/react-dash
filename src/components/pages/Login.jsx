@@ -13,9 +13,9 @@ const FormItem = Form.Item;
     return {}
 })
 class Login extends React.Component {
-    handleSubmit=()=>{
-        this.props.dispatch(loginIn({ url: '', params: {} }, () => {
-            this.props.history.replace({ pathname: '/app/dashboard/index'});
+    onLogin=()=>{
+        this.props.dispatch(loginIn({ url: '', params: {} }, (status) => {
+            this.props.history.push({ pathname: '/app/dashboard/index'});
         }));
     }
     render() {
@@ -27,7 +27,7 @@ class Login extends React.Component {
                         <span>React Admin</span>
                         <PwaInstaller />
                     </div>
-                    <Form onSubmit={this.handleSubmit} style={{maxWidth: '300px'}}>
+                    <Form style={{maxWidth: '300px'}}>
                         <FormItem>
 
                                 <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="管理员输入admin, 游客输入guest" />
@@ -38,7 +38,7 @@ class Login extends React.Component {
                         <FormItem>
                                 <Checkbox>记住我</Checkbox>
                             <span className="login-form-forgot" href="" style={{float: 'right'}}>忘记密码</span>
-                            <Button type="primary" htmlType="submit" className="login-form-button" style={{width: '100%'}}>
+                            <Button type="primary" onClick={()=> { this.onLogin() }} className="login-form-button" style={{width: '100%'}}>
                                 登录
                             </Button>
                             <p style={{display: 'flex', justifyContent: 'space-between'}}>
