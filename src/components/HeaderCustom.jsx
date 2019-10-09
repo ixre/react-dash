@@ -11,11 +11,18 @@ import { Menu, Icon, Layout, Badge } from 'antd';
 // import { withRouter } from 'react-router-dom';
 import { PwaInstaller } from './widget';
 // import { connectAlita } from 'redux-alita';
+import { connect } from 'react-redux';
+import { loginOut } from '../redux/user/Action';
+
 const { Header } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 
-export default class HeaderCustom extends Component {
+@connect((state, props) =>{
+    return { };
+})
+
+class HeaderCustom extends Component {
     state = {
         user: '',
         visible: false,
@@ -49,8 +56,10 @@ export default class HeaderCustom extends Component {
         e.key === 'logout' && this.logout();
     };
     logout = () => {
-        localStorage.removeItem('user');
-        this.props.history.push('/login')
+        this.props.dispatch(loginOut({ url: '', params: { }}, () =>{
+            this.props.history.push('/login')
+        }));
+        // localStorage.removeItem('user');
     };
     popoverHide = () => {
         this.setState({
@@ -109,3 +118,5 @@ export default class HeaderCustom extends Component {
         )
     }
 }
+
+export default HeaderCustom;

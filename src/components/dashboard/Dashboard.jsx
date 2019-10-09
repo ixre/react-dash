@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { getHome } from "../../redux/data/Action";
 
 @connect((state, props) =>{
-    console.log(state,props, 6666)
+    return {}
 })
 
 class Dashboard extends React.Component {

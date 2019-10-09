@@ -7,27 +7,31 @@ import DocumentTitle from 'react-document-title';
 import AllComponents from '../components';
 import routesConfig from './config';
 import queryString from 'query-string';
+import { getCookie } from '../utils/cookie';
+import { connect } from 'react-redux';
 
-export default class CRouter extends Component {
+@connect((state, props) => {
+    console.log(state, props, 3333)
+    return {}
+})
+
+class CRouter extends Component {
+    // shouldComponentUpdate ()
     requireAuth = (permission, component) => {
-        console.log('登录登录')
-        const { auth } = this.props;
-        const { permissions } = auth.data;
-        // const { auth } = store.getState().httpData;
-        if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
-        return component;
+        // const { auth } = this.props;
+        // const { permissions } = auth.data;
+        // // const { auth } = store.getState().httpData;
+        // if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
+        // return component;
     };
     requireLogin = (component, permission) => {
-        const { auth } = this.props;
-        const { permissions } = auth.data;
-        if (process.env.NODE_ENV === 'production' && !permissions) {
-            // 线上环境判断是否登录
-            return <Redirect to={'/login'} />;
+        const token = getCookie('hash_token');
+        if (!token || token === null) {
+            return <Redirect to={'/login'} />
         }
-        return permission ? this.requireAuth(permission, component) : component;
+        return component;
     };
     render() {
-        console.log(2222222)
         return (
             <Switch>
                 {Object.keys(routesConfig).map(key =>
@@ -78,3 +82,4 @@ export default class CRouter extends Component {
         );
     }
 }
+export default CRouter;
