@@ -4,7 +4,6 @@
  */
 import axios from 'axios';
 import { message } from 'antd';
-import { getCookie } from '../utils/cookie';
 
 /**
  * 公用get请求
@@ -28,12 +27,16 @@ export const get = ({ url, msg = '接口异常', config }) =>
  * @param msg       接口异常提示
  * @param headers   接口所需header配置
  */
-export const post = ({ url, data, msg = '接口异常', config }) => {
+export const post = ({ url, data, msg = '接口异常', config }, callback) => {
     return axios
         .post(url, data, config)
-        .then(res => res.data)
+        .then(res => {
+            callback('SUCCESS');
+            return res.data;
+        })
         .catch(err => {
             console.log(err);
+            callback('FAIL');
             message.warn(msg);
         });
 }

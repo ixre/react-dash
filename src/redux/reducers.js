@@ -3,8 +3,8 @@ import user from './user/Reducer';
 import data from './data/Reducer';
 
 export const makeRootReducer = (asyncReducers) => {
-  return combineReducers({
-    user,
+    return combineReducers({
+        user,
     data,
     ...asyncReducers
   })

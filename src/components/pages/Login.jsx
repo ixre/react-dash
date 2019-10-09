@@ -5,10 +5,11 @@ import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { PwaInstaller } from '../widget';
 import { connect } from 'react-redux';
-import { loginIn } from "../../redux/user/Action";
+import { loginIn } from '../../redux/user/Action';
 const FormItem = Form.Item;
 
 @connect((state, props) =>{
+    console.log(state, props)
     return {}
 })
 class Login extends React.Component {
@@ -21,7 +22,9 @@ class Login extends React.Component {
         }
     }
     handleSubmit=()=>{
-        this.props.dispatch(loginIn());
+        this.props.dispatch(loginIn({ url: '', params: {} }, () => {
+            this.props.history.replace({ pathname: '/app/dashboard/index'});
+        }));
     }
     render() {
 

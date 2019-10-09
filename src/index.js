@@ -16,11 +16,7 @@ import Page from './Page';
 
 setConfig(apis);
 
-// Store Initialization
-// ------------------------------------
-console.log(window.__INITIAL_STATE__, '__INITIAL_STATE__')
 const store = createStore(window.__INITIAL_STATE__)
-console.log(store, 'store')
 
 // Render Setup
 // ------------------------------------

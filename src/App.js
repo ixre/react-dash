@@ -5,7 +5,6 @@ import SiderCustom from './components/SiderCustom';
 import HeaderCustom from './components/HeaderCustom';
 import { Layout, notification, Icon } from 'antd';
 import { ThemePicker } from './components/widget';
-import { connectAlita } from 'redux-alita';
 
 const { Content, Footer } = Layout;
 
@@ -90,6 +89,7 @@ export default class App extends Component {
                             toggle={this.toggle}
                             collapsed={this.state.collapsed}
                             user={auth.data || {}}
+                            history={this.props.history}
                         />
                         <Content style={{ margin: '0 16px', overflow: 'initial', flex: '1 1 0' }}>
                             <Routes auth={auth} />

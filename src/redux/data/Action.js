@@ -3,8 +3,8 @@
  * @author 陆佩仪
  * @describe 仅作模拟数据之用
  */
-import { post } from '../../axios/tools';
-import * as config from "../../axios/config";
+// import { post } from '../../axios/tools';
+// import * as config from "../../axios/config";
 export const GET_HOME_DATA = '@data/GET_HOME_DATA';
 export function getHome(payload) {
     // post({

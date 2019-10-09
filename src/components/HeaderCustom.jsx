@@ -4,13 +4,13 @@
 import React, { Component } from 'react';
 import screenfull from 'screenfull';
 import avater from '../style/imgs/b1.jpg';
-import SiderCustom from './SiderCustom';
-import { Menu, Icon, Layout, Badge, Popover } from 'antd';
-import { gitOauthToken, gitOauthInfo } from '../axios';
-import { queryString } from '../utils';
-import { withRouter } from 'react-router-dom';
+// import SiderCustom from './SiderCustom';
+import { Menu, Icon, Layout, Badge } from 'antd';
+// import { gitOauthToken, gitOauthInfo } from '../axios';
+// import { queryString } from '../utils';
+// import { withRouter } from 'react-router-dom';
 import { PwaInstaller } from './widget';
-import { connectAlita } from 'redux-alita';
+// import { connectAlita } from 'redux-alita';
 const { Header } = Layout;
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
@@ -61,7 +61,7 @@ export default class HeaderCustom extends Component {
         this.setState({ visible });
     };
     render() {
-        const { responsive = { data: {} }, path } = this.props;
+        // const { responsive = { data: {} }, path } = this.props;
         return (
             <Header className="custom-theme header" >
 
