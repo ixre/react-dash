@@ -4,19 +4,17 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
-import AllComponents from '../components';
+import AllComponents from '../services';
 import routesConfig from './config';
 import queryString from 'query-string';
 import { getCookie } from '../utils/cookie';
 import { connect } from 'react-redux';
 
 @connect((state, props) => {
-    console.log(state, props, 3333)
     return {}
 })
 
 class CRouter extends Component {
-    // shouldComponentUpdate ()
     requireAuth = (permission, component) => {
         // const { auth } = this.props;
         // const { permissions } = auth.data;
@@ -38,6 +36,7 @@ class CRouter extends Component {
                     routesConfig[key].map(r => {
                         const route = r => {
                             const Component = AllComponents[r.component];
+                            console.log(Component, 'Component')
                             return (
                                 <Route
                                     key={r.route || r.key}

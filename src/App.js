@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import Routes from './routes';
 import DocumentTitle from 'react-document-title';
-import SiderCustom from './components/SiderCustom';
-import HeaderCustom from './components/HeaderCustom';
+import SiderCustom from './services/SiderCustom';
+import HeaderCustom from './services/HeaderCustom';
 import { Layout, notification, Icon } from 'antd';
-import { ThemePicker } from './components/widget';
 
 const { Content, Footer } = Layout;
 
@@ -83,7 +82,6 @@ export default class App extends Component {
             <DocumentTitle title={title}>
                 <Layout>
                     {!responsive.data.isMobile && <SiderCustom collapsed={this.state.collapsed} />}
-                    <ThemePicker />
                     <Layout style={{ flexDirection: 'column' }}>
                         <HeaderCustom
                             toggle={this.toggle}
@@ -94,9 +92,6 @@ export default class App extends Component {
                         <Content style={{ margin: '0 16px', overflow: 'initial', flex: '1 1 0' }}>
                             <Routes auth={auth} />
                         </Content>
-                        <Footer style={{ textAlign: 'center' }}>
-                            React-Admin ©{new Date().getFullYear()} Created by 865470087@qq.com
-                        </Footer>
                     </Layout>
                 </Layout>
             </DocumentTitle>
