@@ -15,7 +15,7 @@ const FormItem = Form.Item;
 class Login extends React.Component {
     onLogin=()=>{
         this.props.dispatch(loginIn({ url: '', params: {} }, (status) => {
-            this.props.history.push({ pathname: '/app/dashboard/index'});
+            this.props.history.push({ pathname: '/pet/petManage'});
         }));
     }
     render() {

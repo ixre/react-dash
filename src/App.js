@@ -77,7 +77,6 @@ export default class App extends Component {
     render() {
         const { title } = this.state;
         const { auth = { data: {} }, responsive = { data: {} } } = this.props;
-        console.log(auth);
         return (
             <DocumentTitle title={title}>
                 <Layout>
@@ -91,6 +90,7 @@ export default class App extends Component {
                         />
                         <Content style={{ margin: '0 16px', overflow: 'initial', flex: '1 1 0' }}>
                             <Routes auth={auth} />
+                            { this.props.children }
                         </Content>
                     </Layout>
                 </Layout>

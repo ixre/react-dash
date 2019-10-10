@@ -4,15 +4,9 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
-import AllComponents from '../services';
 import routesConfig from './config';
 import queryString from 'query-string';
 import { getCookie } from '../utils/cookie';
-import { connect } from 'react-redux';
-
-@connect((state, props) => {
-    return {}
-})
 
 class CRouter extends Component {
     requireAuth = (permission, component) => {
@@ -30,13 +24,13 @@ class CRouter extends Component {
         return component;
     };
     render() {
+        const { route } = this.props;
         return (
             <Switch>
                 {Object.keys(routesConfig).map(key =>
                     routesConfig[key].map(r => {
                         const route = r => {
-                            const Component = AllComponents[r.component];
-                            console.log(Component, 'Component')
+                            const Component = r.component;
                             return (
                                 <Route
                                     key={r.route || r.key}
