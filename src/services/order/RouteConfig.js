@@ -1,5 +1,5 @@
 import { ORDER_APPEAL, ORDER_LIST, ORDER_TRANSFER, ORDER } from './Path';
-import OrderList from '../order/OrderList';
+import OrderList from './page/OrderList';
 
 export default {
     key: ORDER,

@@ -1,6 +1,6 @@
 import { PET_PETMANAGE, PET_MEMBER, PET_BLOCK, PET_PURCHASEDATA, PET_SYSTEM, PET_PATH } from './Path';
-import PetManage from './PetManage';
-import PetPurchaseData from './PetPurchaseData';
+import PetManage from './page/PetManage';
+import PetPurchaseData from './page/PetPurchaseData';
 
 export default {
     key: PET_PATH,

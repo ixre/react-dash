@@ -4,9 +4,9 @@
 
 import React from 'react';
 import { Input } from 'antd';
-import List from '../components/List';
-import './OrderList.less';
-export default class OrderList extends React.Component {
+import List from '../../components/List';
+import './PetManage.less';
+export default class PetManage extends React.Component {
     constructor(props) {
         super();
         this.state = {
@@ -29,39 +29,44 @@ export default class OrderList extends React.Component {
                 key: 'name',
             },
             {
-                title: '领养方姓名',
+                title: '级别',
                 dataIndex: 'level',
                 key: 'level',
             },
             {
-                title: '领养方电话',
+                title: '抢购时间',
                 key: 'time',
                 dataIndex: 'time',
             },
             {
-                title: '转让方姓名',
+                title: '价值区间',
                 key: 'cost',
                 dataIndex: 'cost',
             },
             {
-                title: '转让方电话',
+                title: '预定消耗积分',
                 key: 'estimate_integral',
                 dataIndex: 'estimate_integral',
             },
             {
-                title: '价值',
+                title: '实时消耗积分',
                 key: 'real_integral',
                 dataIndex: 'real_integral',
             },
             {
-                title: '结算天数',
+                title: '合约天数',
                 key: 'days',
                 dataIndex: 'days',
             },
             {
-                title: '结算比例',
+                title: '合约比例',
                 key: 'ratio',
                 dataIndex: 'ratio',
+            },
+            {
+                title: '拆分方式',
+                key: 'split_way',
+                dataIndex: 'split_way',
             },
             {
                 title: '状态',

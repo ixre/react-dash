@@ -5,9 +5,20 @@
 import React from 'react';
 import { Table, Pagination, Button } from 'antd';
 import './List.less'
+import PropTypes from 'prop-types';
+
 export default class List extends React.Component {
+    static defaultProps = {
+        columns: undefined,
+        dataSource: undefined,
+    };
+
+    static propTypes = {
+        columns: PropTypes.array,
+        dataSource: PropTypes.array,
+    };
     constructor(props) {
-        super();
+        super(props);
         this.state = {
             data: [
                 {

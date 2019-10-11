@@ -24,7 +24,6 @@ class CRouter extends Component {
         return component;
     };
     render() {
-        const { route } = this.props;
         return (
             <Switch>
                 {Object.keys(routesConfig).map(key =>

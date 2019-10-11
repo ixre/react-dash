@@ -3,7 +3,6 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import NotFound from './services/NotFound';
 import Login from './services/login/Login';
 import App from './App';
-import PetManage from './services/pet/PetManage';
 import { getCookie } from './utils/cookie';
 import { RouteCell } from './routes/RouteCell';
 import RouteConfig from './routes/config';

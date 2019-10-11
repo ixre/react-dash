@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Routes from './routes';
 import DocumentTitle from 'react-document-title';
 import SiderCustom from './services/SiderCustom';
 import HeaderCustom from './services/HeaderCustom';
 import { Layout, notification, Icon } from 'antd';
 
-const { Content, Footer } = Layout;
+const { Content } = Layout;
 
 export default class App extends Component {
     state = {
@@ -89,7 +88,7 @@ export default class App extends Component {
                             history={this.props.history}
                         />
                         <Content style={{ margin: '0 16px', overflow: 'initial', flex: '1 1 0' }}>
-                            <Routes auth={auth} />
+                            {/*<Routes auth={auth} />*/}
                             { this.props.children }
                         </Content>
                     </Layout>
