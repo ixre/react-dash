@@ -4,26 +4,24 @@
 import React, { Component } from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
-import AllComponents from '../components';
 import routesConfig from './config';
 import queryString from 'query-string';
+import { getCookie } from '../utils/cookie';
 
-export default class CRouter extends Component {
+class CRouter extends Component {
     requireAuth = (permission, component) => {
-        const { auth } = this.props;
-        const { permissions } = auth.data;
-        // const { auth } = store.getState().httpData;
-        if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
-        return component;
+        // const { auth } = this.props;
+        // const { permissions } = auth.data;
+        // // const { auth } = store.getState().httpData;
+        // if (!permissions || !permissions.includes(permission)) return <Redirect to={'404'} />;
+        // return component;
     };
     requireLogin = (component, permission) => {
-        const { auth } = this.props;
-        const { permissions } = auth.data;
-        if (process.env.NODE_ENV === 'production' && !permissions) {
-            // 线上环境判断是否登录
-            return <Redirect to={'/login'} />;
+        const token = getCookie('hash_token');
+        if (!token || token === null) {
+            return <Redirect to={'/login'} />
         }
-        return permission ? this.requireAuth(permission, component) : component;
+        return component;
     };
     render() {
         return (
@@ -31,7 +29,7 @@ export default class CRouter extends Component {
                 {Object.keys(routesConfig).map(key =>
                     routesConfig[key].map(r => {
                         const route = r => {
-                            const Component = AllComponents[r.component];
+                            const Component = r.component;
                             return (
                                 <Route
                                     key={r.route || r.key}
@@ -76,3 +74,4 @@ export default class CRouter extends Component {
         );
     }
 }
+export default CRouter;
