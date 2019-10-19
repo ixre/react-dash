@@ -1,9 +1,9 @@
 /**
  * @author 陆佩仪
- * 设置cookic
+ * 设置cookie
  * @param name
  * @param value
- * @param duration (天）
+ * @param duration (天)
  */
 export function setCookie(name, value, duration = 7) {
     const exp = new Date();
