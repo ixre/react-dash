@@ -1,50 +1,17 @@
-import React from 'react';
-// import ReactDOM from 'react-dom';
-import * as serviceWorker from './serviceWorker';
-// import Page from './Page';
-import * as apis from './axios';
-// // import { AppContainer } from 'react-hot-loader';
-import { setConfig } from 'redux-alita';
-import ReactDOM from 'react-dom'
-import createStore from './redux/createStore'
-import './style/lib/animate.css';
-import './style/antd/index.less';
-import './style/index.less';
-import { Provider } from 'react-redux'
-import Main from './main';
+/**
+ * Copyright 2009-2019 @ to2.net
+ * name : index.js
+ * author : jarrysix (jarrysix#gmail.com)
+ * date : 2019-10-21 19:09
+ * description :
+ * history :
+ */
 
-setConfig(apis);
+import React from "react";
+import ReactDOM from "react-dom";
+import "./css/global.css";
 
-const store = createStore(window.__INITIAL_STATE__)
-
-// Render Setup
-// ------------------------------------
-
-ReactDOM.render(
-    <Provider store={store}>
-        <Main />
-    </Provider>,
-    document.getElementById('root')
-);
-
-// Development Tools
-// ------------------------------------
-// if (__DEV__) {
-//     if (module.hot) {
-//         const renderApp = render
-//
-//         // Setup hot module replacement
-//         module.hot.accept([
-//                 './components/App',
-//                 './routes/index',
-//             ], () =>
-//                 setImmediate(() => {
-//                     ReactDOM.unmountComponentAtNode(MOUNT_NODE)
-//                     render()
-//                 })
-//         )
-//     }
-// }
-
-serviceWorker.register();
-// ------------------------------------
+const App = (props)=>{
+    return <div>hello world</div>;
+};
+ReactDOM.render(<App/>, document.getElementById("root"));
