@@ -1,6 +1,10 @@
+"use strict"
+
 import React from "react";
 import {Context} from "../../apps/main/state";
+import {withRouter} from "react-router-dom";
 
+@withRouter
 export class AuthenticationWrapper extends React.Component {
     constructor(props) {
         super(props);
@@ -13,8 +17,10 @@ export class AuthenticationWrapper extends React.Component {
     }
 
     componentWillMount() {
-        this.hasLogin();
-        let t = this.ctx;
+        console.log("---", this.ctx);
+        //this.ctx.props.history.push("/login");
+        //this.hasLogin();
+        //let t = this.ctx;
         //const {store} = this.context;
         // if (!store.checkLogin()) {
         //     http.jsonPost(fn.api("/check_session"), {}, function (r) {
@@ -45,6 +51,4 @@ export class AuthenticationWrapper extends React.Component {
         </React.Fragment>
     }
 }
-
-
 
