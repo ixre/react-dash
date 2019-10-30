@@ -12,7 +12,7 @@ module.exports = {
     },
     output: {
         filename: '[name]_[hash:8].js',
-        publicPath:isDev?"/":".",
+        publicPath:"/",
     },
     module: {
         rules: [

@@ -14,6 +14,7 @@ import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import {LazyRoute} from "./components/common";
 import {AuthenticationWrapper} from "./components/AuthenticationWrapper/AuthenticationWrapper";
 import App from "./board/app";
+import LoginPage from "./board/login/login";
 
 const renderApp = () => {
     return (<AuthenticationWrapper>
@@ -25,7 +26,7 @@ const Entry = (props)=> {
     return <React.Suspense fallback="">
         <Router>
             <Switch>
-                <LazyRoute exact path='/login' component={Login}/>
+                <LazyRoute exact path='/login' component={LoginPage}/>
                 <Route render={renderApp}/>
             </Switch>
         </Router>

@@ -18,10 +18,6 @@ export default class LoginPage extends React.Component {
         };
     }
 
-    static contextTypes = {
-        store: PropTypes.observableObject
-    };
-
     handleSubmit = (values, callback) => {
         let $this = this;
         const {store} = this.context;
