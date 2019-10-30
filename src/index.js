@@ -9,7 +9,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-import "./css/global.css";
+import "../css/global.css";
 
 const App = (props)=>{
     return <div>hello world</div>;
