@@ -1,12 +1,14 @@
 "use strict"
 
 import React from "react";
-import {Context} from "../../board/state"
 import {withRouter} from "react-router-dom";
+import BoardUserContext from "../../board/state";
 
-@withRouter
-export class AuthenticationWrapper extends React.Component {
-    constructor(props) {
+
+ class AuthenticationWrapper extends React.Component {
+     //static contextType = BoardUserContext;
+     // 在函数组件中可用: const {isLogin} = React.useContext(UserContext)
+     constructor(props) {
         super(props);
         this.state = {
             isLogin: false
@@ -17,8 +19,11 @@ export class AuthenticationWrapper extends React.Component {
     }
 
     componentWillMount() {
-        console.log("---", this.ctx);
-        //this.ctx.props.history.push("/login");
+        //this.hasLogin();
+        const {isLogin} = this.context;
+        if(!isLogin){
+            this.props.history.push("/login");
+        }
         //this.hasLogin();
         //let t = this.ctx;
         //const {store} = this.context;
@@ -46,9 +51,12 @@ export class AuthenticationWrapper extends React.Component {
 
     render() {
         return <React.Fragment>
-            <Context.Consumer>{ctx => this.ctx = ctx}</Context.Consumer>
-            {this.state.isLogin ? this.props.children : null}
+            { this.state.isLogin ? this.props.children : null}
         </React.Fragment>
     }
 }
+
+const c =  withRouter(AuthenticationWrapper);
+c.class = AuthenticationWrapper;
+export default c;
 

@@ -67,7 +67,7 @@ module.exports = {
                 }
             }),
             new UglifyJsPlugin({
-                sourceMap: false,
+                sourceMap:isDev,
                 uglifyOptions: {
                     warnings: false,
                     compress: {

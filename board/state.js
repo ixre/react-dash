@@ -6,4 +6,5 @@ export class LoginState{
 };
 
 // 用户状态上下文
-export const Context = React.createContext(new LoginState());
+const BoardUserContext = React.createContext(new LoginState());
+export default BoardUserContext;

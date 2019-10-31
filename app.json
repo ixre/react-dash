@@ -1,0 +1,18 @@
+{
+  "name": "go2o",
+  "displayName": "go2o",
+  "version": "1.0.17",
+  "theme": "default",
+  "tls": true,
+  "domain": "turbo666.com",
+  "api": {
+    "url": "https://api.turbo666.com/api",
+    "key": "go2o",
+    "secret": "131409"
+  },
+  "api_ex":{
+    "url": "https://home.turbo666.com/api",
+    "key": "ex20190530",
+    "secret": "2393d2d9fb16sdbe181c54d1764bd33b"
+  }
+}
