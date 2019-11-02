@@ -2,7 +2,7 @@ import a from "./app.json";
 import a_dev from "./app_dev.json";
 import {hex} from "./lib/react";
 
-let boardURL = "http://localhost:14281/new";
+let boardURL = "http://localhost:14281/v2";
 
 const load = (src,a)=> {
     let o = Object.create(src||{});
