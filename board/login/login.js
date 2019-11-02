@@ -25,8 +25,6 @@ class LoginPage extends React.Component {
         const store = this.context;
         const data = {"user": values.user, "pwd": hex("md5", values.password)};
         store.isLogin = true;
-       // this.props.history.push("/");
-
         fetchPost(boardURLS.LOGIN, data,  (r)=> {
             callback();
             if (!r.code) {
