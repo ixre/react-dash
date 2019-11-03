@@ -10,7 +10,8 @@
 import config from "../config";
 
 let boardURLS =  {
-    LOGIN:"/login"
+    LOGIN:"/login",
+    CHECK_SESSION:"/check_session"
 };
 
 const boardURL = config.board_url||"";

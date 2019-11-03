@@ -4,7 +4,7 @@ import './login.css';
 import Alert from "antd/es/alert";
 import {withRouter} from "react-router-dom";
 import {Icon} from "antd";
-import {fetchPost} from "../../lib/react/http";
+import {fetchPost} from "../../lib/react/http2";
 import boardURLS from "../urls";
 import {hex} from "../../lib/react";
 import BoardUserContext from "../state";
@@ -23,20 +23,31 @@ class LoginPage extends React.Component {
 
     handleSubmit = (values, callback) => {
         const store = this.context;
-        const data = {"user": values.user, "pwd": hex("md5", values.password)};
+        const data = {
+            "user": values.user,
+            "pwd": hex("md5", values.password),
+            "option":1,
+        };
         store.isLogin = true;
-        fetchPost(boardURLS.LOGIN, data,  (r)=> {
+        fetchPost(boardURLS.LOGIN, data,  (rsp)=> {
             callback();
-            if (!r.code) {
+            if(store.saveSession(rsp)){
+                this.props.history.push("/home");
+                this.setState({err_msg:"登录成功"});
+            }else {
+                this.setState({err_msg: rsp["err_msg"]});
+            }
+
+            if (!rsp.ErrCode) {
                 store.isLogin = true;
-                store.sessionID = r.data["SessionId"];
-                store.user = {
-                    userId:r.data["UserId"],
-                    isSuper: r.data["SuperUser"] == "1"
-                };
+                store.sessionID = rsp.Data["SessionId"];
+                // store.user = {
+                //     userId:r.data["UserId"],
+                //     isSuper: r.data["SuperUser"] == "1"
+                // };
                 this.props.history.push("/home");
             } else {
-                this.setState({err_msg: r["err_msg"]});
+                this.setState({err_msg: rsp["err_msg"]});
             }
         },  (r)=> {
             this.setState({err_msg: r || "Oops! Connection timeout"});
