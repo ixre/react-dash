@@ -18,14 +18,10 @@ div,p{margin:0;}
 
 .a-header{display:flex;flex-flow:row nowrap;height:34px;line-height:34px;background:#326690;color:#FFF;}
 .a-header .logo{padding:0 1em;}
-.a-header .nav{flex:2;font-size:125%;}
-.a-header .user{flex:0}
+.a-header .nav{flex:2;font-size:125%;line-height:38px;}
+.a-header .user{padding-right:1em;}
 .a-header .nav li{display:inline;padding:0 1em;cursor: pointer;}
 
-.a-header .top{height:2px;display:none;}
-.a-header .logo img{position: absolute;top:0;bottom:0;margin:auto;max-width:100%;}
-.a-header .logo .licence{position:absolute;right:0;left:140px;top:20px;bottom:0;margin:auto 0;}
-.a-header .logo .licence h1{color:#FFF;font-size:18px;margin:0;color:#ffe957;}
 
 .t2-pa-user{position:absolute;right:10px;top:15px;color:#E0C551;overflow:hidden;font-size:13px;}
 .t2-pa-user a{color:#E0C551;text-decoration:none;padding:0 10px;}

@@ -25,6 +25,14 @@ function GroupNav({menu}){
    </div>
 }
 
+function UserBar({user}){
+   return  <div className="user">
+       欢迎您：<span className="username" field="userName" name="field_userName">{user.name}</span>
+       &nbsp;&nbsp;
+       <span className="btn-logout">退出</span>
+   </div>;
+}
+
 
 export class AdvanceLayout extends React.Component {
     static contextType = BoardUserContext;
@@ -79,19 +87,7 @@ export class AdvanceLayout extends React.Component {
                 <div className="a-header">
                     <Logo />
                     <GroupNav menu={menu}/>
-                    <div className="user">
-                        <div className="t2-pa-user">
-
-                            欢迎您：<span className="username" field="userName" name="field_userName"></span>
-                            &nbsp;&nbsp; |
-                            <a href="javascript:void(0)"
-                               onClick="FwTab.show('修改用户资料', '?module=user&amp;action=saveProfile', true);">
-                                修改密码</a>|<a href="javascript:;" className="btn-logout">退出</a>
-
-                            <span className="data-word">今天是：<span field="dateStr"
-                                                                  name="field_dateStr">2019年11月04日&nbsp;/&nbsp;周一</span></span>
-                        </div>
-                    </div>
+                   <UserBar user={{name:"jarry"}}/>
                 </div>
             </div>
         );
