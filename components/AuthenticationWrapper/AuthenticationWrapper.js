@@ -18,6 +18,8 @@ import boardURLS from "../../board/urls";
 
     componentWillMount() {
         const store = this.context;
+        this.setState({isLogin:true});
+        return;
         fetchPost(boardURLS.CHECK_SESSION,{},(rsp)=>{
             if(store.saveSession(rsp)) {
                 this.setState({isLogin:true});

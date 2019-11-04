@@ -14,7 +14,7 @@ import {HashRouter as Router, Route, Switch} from "react-router-dom";
 import {LazyRoute} from "./components/common";
 import AuthenticationWrapper from "./components/AuthenticationWrapper/AuthenticationWrapper";
 import App from "./board/app";
-import LoginPage from "./board/login/login";
+import LoginPage from "./board/feature/login/login";
 import {LoginState} from "./board/state";
 import BoardUserContext from "./board/state";
 
@@ -24,7 +24,6 @@ AuthenticationWrapper.class.contextType = BoardUserContext;
 const renderApp = () => {
     return (<AuthenticationWrapper><App/></AuthenticationWrapper>);
 };
-
 
 const Entry = (props)=> {
     return <React.Suspense fallback="">

@@ -1,13 +1,13 @@
 import React, {Fragment} from 'react';
-import LoginForm from '../../components/AuthenticationWrapper/LoginForm';
+import LoginForm from '../../../components/AuthenticationWrapper/LoginForm';
 import './login.css';
 import Alert from "antd/es/alert";
 import {withRouter} from "react-router-dom";
 import {Icon} from "antd";
-import {fetchPost} from "../../lib/react/http2";
-import boardURLS from "../urls";
-import {hex} from "../../lib/react";
-import BoardUserContext from "../state";
+import {fetchPost} from "../../../lib/react/http2";
+import boardURLS from "../../urls";
+import {hex} from "../../../lib/react";
+import BoardUserContext from "../../state";
 
 
 class LoginPage extends React.Component {
@@ -35,19 +35,7 @@ class LoginPage extends React.Component {
                 this.props.history.push("/home");
                 this.setState({err_msg:"登录成功"});
             }else {
-                this.setState({err_msg: rsp["err_msg"]});
-            }
-
-            if (!rsp.ErrCode) {
-                store.isLogin = true;
-                store.sessionID = rsp.Data["SessionId"];
-                // store.user = {
-                //     userId:r.data["UserId"],
-                //     isSuper: r.data["SuperUser"] == "1"
-                // };
-                this.props.history.push("/home");
-            } else {
-                this.setState({err_msg: rsp["err_msg"]});
+                this.setState({err_msg: rsp["ErrMsg"]});
             }
         },  (r)=> {
             this.setState({err_msg: r || "Oops! Connection timeout"});
