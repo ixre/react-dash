@@ -3,9 +3,8 @@ import React from "react";
 import "./advance_layout.css";
 import BoardUserContext from "../state";
 import {PropTypes} from "prop-types";
+import {Close} from "styled-icons/evil/Close";
 
-const {Header, Content, Sider} = Layout;
-const SubMenu = Menu.SubMenu;
 
 let Logo = (props) => {
     return <div className="logo">
@@ -15,6 +14,7 @@ let Logo = (props) => {
     </div>;
 };
 
+// 分组导航
 function GroupNav({menu, onClick}) {
     return <div className="nav">
         <ul>
@@ -34,7 +34,8 @@ function UserBar({user}) {
     </div>;
 }
 
-function SubNav({data, group, width}) {
+// 子菜单导航
+function SubNav({data, group, width,onClick}) {
     let g = data.find((it) => it["code"] == group) || {children: []};
     if (g == null) return null;
     return <div className="a-sub-nav" style={{width: width + "px"}}>
@@ -47,8 +48,8 @@ function SubNav({data, group, width}) {
                         {children.map((c, n2) => {
                             const {title} = c;
                             return <li key={"nc" + n2}>
-                                <div className="fn" url="/order/list">{title}</div>
-                            </li>
+                                <div className="fn" onClickCapture={()=>onClick(c)}>{title}</div>
+                            </li>;
                         })}
                     </ul>
                 </div>
@@ -65,6 +66,7 @@ export class AdvanceLayout extends React.Component {
         super(props);
         this.state = {
             groupCode: "home",
+            frames:[],
 
             isSuper: false,
             collapsed: false,
@@ -80,6 +82,21 @@ export class AdvanceLayout extends React.Component {
     static propTypes = {
         menu: PropTypes.array,
     };
+
+    show(t){
+        let {frames} = this.state;
+        let exists = false;
+        frames.map((it)=>{
+            if(it.url == t.url){
+                exists = true;
+                it.active = true;
+            }else {
+                it.active = false;
+            }
+        });
+        if(!exists) frames.push(t);
+        this.setState({frames:frames});
+    }
 
     componentDidMount() {
         // 控制管理员和普通用户显示
@@ -110,10 +127,16 @@ export class AdvanceLayout extends React.Component {
     groupNavClick(code) {
         this.setState({groupCode: code});
     }
+    pageNavClick({title,code,url}){
+        this.show({title,url:"http://board.super4bit.co"+url,closable:true,code,active:true});
+    }
+    activeTab(t){
+        this.show({url:t.url});
+    }
 
     render() {
         const {menu} = this.props;
-        const {groupCode} = this.state;
+        const {groupCode,frames} = this.state;
         return (
             <div className="flex-box">
                 <div className="a-header">
@@ -122,19 +145,32 @@ export class AdvanceLayout extends React.Component {
                     <UserBar user={{name: "jarry"}}/>
                 </div>
                 <div className="a-main">
-                    <SubNav width={200} data={menu} group={groupCode || "home"}/>
+                    <SubNav width={200} data={menu} group={groupCode || "home"} onClick={this.pageNavClick.bind(this)}/>
                     <div className="a-frames">
-                        <div className="t2-pa-tabs page-tabs">
-                            <ul></ul>
-                            <div className="clearfix"></div>
+                        <div className="a-tabs t2-pa-tabs page-tabs">
+                            <ul>
+                                {frames.map((it,n)=>{
+                                    const {title,active} = it;
+                                    return <li key={"tab"+n} className={active?"current":""}>
+                                        <span className="tab-title" onClickCapture={this.activeTab.bind(this,it)}>{title}</span>
+                                        <span className="close-btn"><Close color="#F00" size={12}/></span>
+                                    </li>;
+                                })}
+                            </ul>
                         </div>
                         <div className="a-ie7">针对IE7优化</div>
                         <div className="a-page-frames">
-                            <div className="frames"></div>
+                            <div className="frames">
+                                {frames.map((it,n)=>{
+                                    const {active,url} = it;
+                                    return <div key={"tab"+n} className={"frame"+(active?" current":"")}>
+                                            <iframe frameBorder="0" src={url}></iframe>
+                                    </div>;
+                                })}
+                            </div>
                             <div className="page-frame-shadow hidden">这是为支持分列右侧拖动</div>
                         </div>
                     </div>
-
                 </div>
             </div>
         );

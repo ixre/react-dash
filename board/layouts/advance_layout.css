@@ -18,6 +18,9 @@ div,p{margin:0;}
 
 #root{height:100%;}
 .flex-box{height:100%;display:flex;flex-direction:column;}
+
+.a-header,.a-main,.a-frames,.a-tabs,.a-page-frames{display:flex;flex-flow:column nowrap;}
+
 .a-header,.a-main{display:flex;flex-flow: row nowrap;}
 .a-header{height:34px;line-height:34px;background:#326690;color:#FFF;}
 .a-header .logo{padding:0 1em;}
@@ -27,7 +30,7 @@ div,p{margin:0;}
 
 .a-main{background:#FBFBFB;height:100%;}
 .a-sub-nav{background:#EFEFEF;border:solid 2px #FFF;}
-.a-frames{flex:1;}
+.a-frames{display:flex;flex:1;flex-flow:column wrap;}
 
 
 /* menu */
@@ -42,9 +45,35 @@ div,p{margin:0;}
 .a-sub-nav ul li.current{background:#FEF2B5;color: #c87b07;font-weight: bold;}
 .a-sub-nav ul li .fn{padding-left:50px;}
 
+/*** tab ***/
+.a-tabs {height:27px;border-bottom:solid 1px #D5D5D5;margin-left: 0;width:100%;}
+.a-tabs ul{list-style:none;padding:0;margin:0;}
+.a-tabs li{float:left;position:relative;line-height:26px;margin-right:1px;border:solid 1px #cacaca;
+    background:#FFF;color:#666;font-weight:bold;list-style:none;}
+.a-tabs li.current{background:#FBFBFB;color:#506b78;border-bottom:solid 1px #FBFBFB;}
+.a-tabs li span.link{cursor:pointer;}
+.a-tabs li .tab-close{cursor:pointer;position:absolute;right:0;top:0;font-family:Arial;color:#000;padding:0 12px;
+    font-size:16px;text-indent:-99em;}
+.a-tabs li .tab-title{display:block;float:left;padding:0 20px 0 15px;line-height:26px; vertical-align:central;cursor:default;}
+.a-tabs li span.rgt{/*background-position:-234px -130px; display: block;height: 26px;*/width: 5px;float:left;}
+/*.page-tabs li.current span.rgt{background-position:-234px -156px;}*/
+.a-tabs .close-btn{}
 
+
+/* frame (ie6,7下loading宽度不正常，解决办法设固定宽度) */
+.a-page-frames{flex:1}
+.a-page-frames iframe{width:100%;height:100%;}
+.a-page-frames .mask{position:absolute;left:1px;top:0;background:#f5f5f5;opacity:0.7;filter:alpha(opacity=70);z-index:898;}
+
+.a-page-frames .frames{height:100%;}
+.a-page-frames .frames div.frame {visibility:hidden; clear: both;height:0;}
+.a-page-frames .frames div.current {visibility:visible;height:100%;}
 
 .a-ie7{height:0px;overflow:hidden;clear:both;display:none;}
+
+
+
+
 
 .page-nav li:first-child{border-left:none;}
 .page-nav li:last-child{border-right:none;}
@@ -64,32 +93,11 @@ div,p{margin:0;}
 
 
 
-/*** tab ***/
-.t2-pa-tabs {height:27px;border-bottom:solid 1px #D5D5D5;margin-left: 0;}
-.page-tabs ul{list-style:none;padding:0;margin:0;}
-.page-tabs li{float:left;position:relative;line-height:26px;margin-right:1px;border:solid 1px #cacaca;
-    background:#FFF;color:#666;font-weight:bold;list-style:none;}
-.page-tabs li.current{background:#FBFBFB;color:#506b78;border-bottom:solid 1px #FBFBFB;}
-.page-tabs li span.link{cursor:pointer;}
-.page-tabs li .tab-close{cursor:pointer;position:absolute;right:0;top:0;font-family:Arial;color:#000;padding:0 12px;font-size:16px;
-    text-indent:-99em;
-}
-.page-tabs li .tab-title{display:block;float:left;padding:0 20px 0 15px;line-height:26px; vertical-align:central;cursor:default;}
-.page-tabs li span.rgt{/*background-position:-234px -130px; display: block;height: 26px;*/width: 5px;float:left;}
-/*.page-tabs li.current span.rgt{background-position:-234px -156px;}*/
-
-/* frame (ie6,7下loading宽度不正常，解决办法设固定宽度) */
-.page-frames{background:#fff;position:absolute;top:30px;right:0;bottom:0;left:0;}
-.page-frames iframe{width:100%;height:100%;}
-.page-frames .mask{position:absolute;left:1px;top:0;background:#f5f5f5;opacity:0.7;filter:alpha(opacity=70);z-index:898;}
 .loading{z-index:899;border:solid 1.5px #FA0;background:#FEA;}
 .loading .lft{}
 .loading .main{padding:0 3em;display:block;color:#666;line-height:24px;text-align:center;}
 .loading .text{text-shadow:0 1px 0 #FFF;font-weight:bold;}
 
-.page-frames .frames{height:100%;}
-.page-frames .frames div.frame {visibility:hidden; clear: both;}
-.page-frames .frames div.current {visibility:visible; }
 
 /* ++++++++++++++++ UI ++++++++++++++++++ */
 .ui-tree *{vertical-align: middle;}

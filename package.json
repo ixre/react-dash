@@ -1,5 +1,5 @@
 {
-  "homepage":".",
+  "homepage": ".",
   "scripts": {
     "start": "webpack-dev-server --mode development --env",
     "build": "webpack --mode production --env.production"
@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "antd": "^3.24.3",
-    "react-router-dom": "latest"
+    "react-router-dom": "latest",
+    "styled-components": "^4.4.1",
+    "styled-icons": "^8.6.0"
   }
 }
