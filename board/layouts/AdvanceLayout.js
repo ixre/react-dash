@@ -15,31 +15,58 @@ let Logo = (props) => {
     </div>;
 };
 
-function GroupNav({menu}){
-   return <div className="nav">
-       <ul>
-           {menu.map((it,n)=>(
-              <li><span>{it.title}</span></li>
-           ))}
-       </ul>
-   </div>
+function GroupNav({menu, onClick}) {
+    return <div className="nav">
+        <ul>
+            {menu.map((it, n) => {
+                const {code, title} = it;
+                return <li key={"g" + n} onClickCapture={() => onClick(code, title, n)}><span>{title}</span></li>
+            })}
+        </ul>
+    </div>;
 }
 
-function UserBar({user}){
-   return  <div className="user">
-       欢迎您：<span className="username" field="userName" name="field_userName">{user.name}</span>
-       &nbsp;&nbsp;
-       <span className="btn-logout">退出</span>
-   </div>;
+function UserBar({user}) {
+    return <div className="user">
+        欢迎您：<span className="username" field="userName" name="field_userName">{user.name}</span>
+        &nbsp;&nbsp;
+        <span className="btn-logout">退出</span>
+    </div>;
+}
+
+function SubNav({data, group, width}) {
+    let g = data.find((it) => it["code"] == group) || {children: []};
+    if (g == null) return null;
+    return <div className="a-sub-nav" style={{width: width + "px"}}>
+        {g.children.map((it, n) => {
+            const {title, children} = it;
+            return <div key={n} className="nav-group" group-id="demo">
+                <div className="nav-group-title">{title}</div>
+                <div className="panel">
+                    <ul className={"fns fns_" + n}>
+                        {children.map((c, n2) => {
+                            const {title} = c;
+                            return <li key={"nc" + n2}>
+                                <div className="fn" url="/order/list">{title}</div>
+                            </li>
+                        })}
+                    </ul>
+                </div>
+            </div>
+        })}
+    </div>;
 }
 
 
 export class AdvanceLayout extends React.Component {
     static contextType = BoardUserContext;
+
     constructor(props) {
         super(props);
         this.state = {
-            isSuper : false,
+            groupCode: "home",
+
+            isSuper: false,
             collapsed: false,
             name: "",
             version: "",
@@ -51,7 +78,7 @@ export class AdvanceLayout extends React.Component {
     }
 
     static propTypes = {
-        menu:PropTypes.array,
+        menu: PropTypes.array,
     };
 
     componentDidMount() {
@@ -80,14 +107,34 @@ export class AdvanceLayout extends React.Component {
         this.props.history.push(href);
     };
 
+    groupNavClick(code) {
+        this.setState({groupCode: code});
+    }
+
     render() {
         const {menu} = this.props;
+        const {groupCode} = this.state;
         return (
-            <div>
+            <div className="flex-box">
                 <div className="a-header">
-                    <Logo />
-                    <GroupNav menu={menu}/>
-                   <UserBar user={{name:"jarry"}}/>
+                    <Logo/>
+                    <GroupNav menu={menu} onClick={this.groupNavClick.bind(this)}/>
+                    <UserBar user={{name: "jarry"}}/>
+                </div>
+                <div className="a-main">
+                    <SubNav width={200} data={menu} group={groupCode || "home"}/>
+                    <div className="a-frames">
+                        <div className="t2-pa-tabs page-tabs">
+                            <ul></ul>
+                            <div className="clearfix"></div>
+                        </div>
+                        <div className="a-ie7">针对IE7优化</div>
+                        <div className="a-page-frames">
+                            <div className="frames"></div>
+                            <div className="page-frame-shadow hidden">这是为支持分列右侧拖动</div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         );
