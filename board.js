@@ -17,13 +17,11 @@ import App from "./board/app";
 import LoginPage from "./board/feature/login/login";
 import {LoginState} from "./board/state";
 import BoardUserContext from "./board/state";
+import {Index} from "./board/feature/home/Index";
 
 const store = new LoginState();
 AuthenticationWrapper.class.contextType = BoardUserContext;
 
-const renderApp = () => {
-    return (<AuthenticationWrapper><App/></AuthenticationWrapper>);
-};
 
 const Entry = (props)=> {
     return <React.Suspense fallback="">
@@ -31,7 +29,14 @@ const Entry = (props)=> {
         <Router>
             <Switch>
                 <LazyRoute exact path='/login' component={LoginPage}/>
-                <Route render={renderApp}/>
+                <Route render={()=>(
+                    <AuthenticationWrapper>
+                        <Switch>
+                            <Route exact path='/' component={App}/>
+                            <Route path='/home' component={Index}/>
+                        </Switch>
+                    </AuthenticationWrapper>
+                )}/>
             </Switch>
         </Router>
         </BoardUserContext.Provider>
