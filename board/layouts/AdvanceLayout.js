@@ -87,14 +87,16 @@ export class AdvanceLayout extends React.Component {
         let {frames} = this.state;
         let exists = false;
         frames.map((it)=>{
-            if(it.url == t.url){
-                exists = true;
-                it.active = true;
-            }else {
-                it.active = false;
+            if(it != null) {
+                if (it.url == t.url) {
+                    exists = true;
+                    it.active = true;
+                } else {
+                    it.active = false;
+                }
             }
         });
-        if(!exists) frames.push(t);
+        if(!exists)frames.push(t);
         this.setState({frames:frames});
     }
 
@@ -133,14 +135,35 @@ export class AdvanceLayout extends React.Component {
     activeTab(t){
         this.show({url:t.url});
     }
-    closeTab(t){
+    closeTab(t) {
         const {url} = t;
         let {frames} = this.state;
-        frames.map((it)=>{
-            if(it.url == url){
-                const index = frames.indexOf(it);
-                frames.splice(index, 1);
-                this.setState({frames:frames});
+        frames.map((it, n) => {
+            if (it != null && it.url == url) {
+                if (it.active) {
+                    let array = frames.slice(n + 1);
+                    if (array.length > 0) {
+                        // active next tab element
+                        for (let i = 0; i < array.length; i++) {
+                            if (array[i]) {
+                                array[i].active = true;
+                                break;
+                            }
+                        }
+                    } else {
+                        // active previous tab element
+                        array = frames.slice(0, n);
+                        for (let i = array.length; i > 0; i--) {
+                            if (array[i]) {
+                                array[i].active = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                // reset tab to null pointer
+                frames[n] = null;
+                this.setState({frames: frames});
             }
         });
     }
@@ -161,6 +184,7 @@ export class AdvanceLayout extends React.Component {
                         <div className="a-tabs t2-pa-tabs page-tabs">
                             <ul>
                                 {frames.map((it,n)=>{
+                                    if(it==null)return null;
                                     const {title,active} = it;
                                     return <li key={"tab"+n} className={active?"current":""}>
                                         <span className="tab-title" onClickCapture={this.activeTab.bind(this,it)}>{title}</span>
@@ -173,6 +197,7 @@ export class AdvanceLayout extends React.Component {
                         <div className="a-page-frames">
                             <div className="frames">
                                 {frames.map((it,n)=>{
+                                    if(it==null)return null;
                                     const {active,url} = it;
                                     return <div key={"tab"+n} className={"frame"+(active?" current":"")}>
                                             <iframe frameBorder="0" src={url}></iframe>
