@@ -133,6 +133,17 @@ export class AdvanceLayout extends React.Component {
     activeTab(t){
         this.show({url:t.url});
     }
+    closeTab(t){
+        const {url} = t;
+        let {frames} = this.state;
+        frames.map((it)=>{
+            if(it.url == url){
+                const index = frames.indexOf(it);
+                frames.splice(index, 1);
+                this.setState({frames:frames});
+            }
+        });
+    }
 
     render() {
         const {menu} = this.props;
@@ -153,7 +164,7 @@ export class AdvanceLayout extends React.Component {
                                     const {title,active} = it;
                                     return <li key={"tab"+n} className={active?"current":""}>
                                         <span className="tab-title" onClickCapture={this.activeTab.bind(this,it)}>{title}</span>
-                                        <span className="close-btn"><Close color="#F00" size={12}/></span>
+                                        <span className="close-btn" onClickCapture={this.closeTab.bind(this,it)}><Close color="#666" size={14}/></span>
                                     </li>;
                                 })}
                             </ul>

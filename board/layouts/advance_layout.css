@@ -57,7 +57,7 @@ div,p{margin:0;}
 .a-tabs li .tab-title{display:block;float:left;padding:0 20px 0 15px;line-height:26px; vertical-align:central;cursor:default;}
 .a-tabs li span.rgt{/*background-position:-234px -130px; display: block;height: 26px;*/width: 5px;float:left;}
 /*.page-tabs li.current span.rgt{background-position:-234px -156px;}*/
-.a-tabs .close-btn{}
+.a-tabs .close-btn{margin:-2px 1em 0 -1em;}
 
 
 /* frame (ie6,7下loading宽度不正常，解决办法设固定宽度) */
