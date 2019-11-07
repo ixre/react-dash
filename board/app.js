@@ -10,11 +10,13 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount(){
+        this.layout.show({title:"欢迎首页",url:"#/home",active:true,closable:false});
+    }
 
     render() {
         return (
-            <AdvanceLayout className="app-container" menu={menu}>
-
+            <AdvanceLayout className="app-container" menu={menu} ref={(layout)=>this.layout = layout}>
             </AdvanceLayout>
         );
     }

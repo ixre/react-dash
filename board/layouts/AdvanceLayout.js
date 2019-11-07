@@ -122,15 +122,11 @@ export class AdvanceLayout extends React.Component {
         });
     };
 
-    assignUrl = (href) => {
-        this.props.history.push(href);
-    };
-
     groupNavClick(code) {
         this.setState({groupCode: code});
     }
     pageNavClick({title,code,url}){
-        this.show({title,url:"http://board.super4bit.co"+url,closable:true,code,active:true});
+        this.show({title,url:url,closable:true,code,active:true});
     }
     activeTab(t){
         this.show({url:t.url});
@@ -139,37 +135,41 @@ export class AdvanceLayout extends React.Component {
         const {url} = t;
         let {frames} = this.state;
         frames.map((it, n) => {
-            if (it != null && it.url == url) {
-                if (it.active) {
-                    let array = frames.slice(n + 1);
-                    if (array.length > 0) {
-                        // active next tab element
-                        for (let i = 0; i < array.length; i++) {
-                            if (array[i]) {
-                                array[i].active = true;
-                                break;
-                            }
-                        }
-                    } else {
-                        // active previous tab element
-                        array = frames.slice(0, n);
-                        for (let i = array.length; i > 0; i--) {
-                            if (array[i]) {
-                                array[i].active = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-                // reset tab to null pointer
-                frames[n] = null;
-                this.setState({frames: frames});
+            if (it == null || it.url != url) return;
+            if (it.active) {
+                this.activeOtherTab(frames, n);
             }
+            // reset tab to null pointer
+            frames[n] = null;
+            this.setState({frames: frames});
         });
     }
 
+    // when current tab closed , should active another tab
+    activeOtherTab(frames, n) {
+        let array = frames.slice(n + 1);
+        if (array.length > 0) {
+            // active next tab element
+            for (let i = 0; i < array.length; i++) {
+                if (array[i]) {
+                    array[i].active = true;
+                    break;
+                }
+            }
+        } else {
+            // active previous tab element
+            array = frames.slice(0, n);
+            for (let i = array.length; i >= 0; i--) {
+                if (array[i]) {
+                    array[i].active = true;
+                    break;
+                }
+            }
+        }
+    }
+
     render() {
-        const {menu} = this.props;
+        const {menu,children} = this.props;
         const {groupCode,frames} = this.state;
         return (
             <div className="flex-box">
@@ -185,10 +185,10 @@ export class AdvanceLayout extends React.Component {
                             <ul>
                                 {frames.map((it,n)=>{
                                     if(it==null)return null;
-                                    const {title,active} = it;
+                                    const {title,active,closable} = it;
                                     return <li key={"tab"+n} className={active?"current":""}>
                                         <span className="tab-title" onClickCapture={this.activeTab.bind(this,it)}>{title}</span>
-                                        <span className="close-btn" onClickCapture={this.closeTab.bind(this,it)}><Close color="#666" size={14}/></span>
+                                            {closable && <span className="close-btn" onClickCapture={this.closeTab.bind(this,it)}><Close color="#666" size={14}/></span>}
                                     </li>;
                                 })}
                             </ul>
@@ -208,6 +208,7 @@ export class AdvanceLayout extends React.Component {
                         </div>
                     </div>
                 </div>
+                {children}
             </div>
         );
     }
